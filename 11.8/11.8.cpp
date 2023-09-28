@@ -693,7 +693,7 @@ void customerSelect(CustomerData* customerPTR) {
 
 		}
 
-	} while (userSelection != NUM_CUSTOMERS + 1);
+	} while (userSelection != NUM_CUSTOMERS + 1); // == 11 , 1- cust, 2- cust ..//.., 10 - customer 1-10, back/quit = 11
 
 }
 

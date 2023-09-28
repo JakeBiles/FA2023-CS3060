@@ -23,7 +23,7 @@ const double MAX_TEMP = 140;
 const double MIN_TEMP = -100;
 const int SET_WIDTH_SPACE = 15;
 const double NUM_DATA_POINTS = 4;
-const size_t NUN_MONTHS = 12;
+const size_t NUN_MONTHS = 1;
 const unordered_map<size_t, string> monthMap = {
 
 	{0,"January"},
@@ -86,7 +86,6 @@ int main() {
 	return 0;
 
 }
-
 
 // IMPLEMENTATION //
 /* Set Temp

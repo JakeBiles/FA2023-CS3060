@@ -11,4 +11,4 @@ int main() {
 	binInventoryTracker();
 
 	return 0;
-}
+} 

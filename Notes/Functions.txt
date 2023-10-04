@@ -1,0 +1,16 @@
+* Inline functions prove more time effiecent where a trade off is space effiecency. (Faster, but bigger)
+	* The inline function replaces the call with the code of the function : Inline Expression
+	* EX {
+
+		void helloWorld() { std::cout << "Hello world!"; }
+
+	     }
+
+* Prototype functions prove space efficent, however, less time efficent. (Smaller, but slower)
+	* The prototype functions goes to the implemenetation.
+	* EX {
+
+		void helloWorld();
+		void helloWorld() { std::cout << "Hello world!"; }
+
+	     }

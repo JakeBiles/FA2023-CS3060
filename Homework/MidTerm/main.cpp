@@ -3,7 +3,7 @@
 #include <string>
 
 const size_t NUM_TESTS = 4;
-const size_t NUM_STUDENTS = 7;
+const size_t NUM_STUDENTS = 1;
 
 
 struct Student
@@ -49,7 +49,6 @@ int main() {
 
 				std::cout << "Please enter " << students[i].name << "'s test score for the " << j + 1 << " test." << std::endl;
 				std::cin >> students[i].scores[j];
-
 				if (students[i].scores[j] >= 0 && students[i].scores[j] <= 100) isValid = true;
 				else std::cout << "Out of range!" << std::endl;
 

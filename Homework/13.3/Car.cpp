@@ -12,17 +12,8 @@ Car::Car(int yearModel, std::string make) {
 }
 
 // Accessors (Getters/Setters)
-int Car::getSpeed() {
-
-	return this->speed;
-
-}
-
-int Car::getYear() {
-
-	return this->yearModel;
-
-}
+int Car::getSpeed() { return this->speed; }
+int Car::getYear() { return this->yearModel; }
 
 std::string Car::getMake() {
 

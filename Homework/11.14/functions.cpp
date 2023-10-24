@@ -1,7 +1,6 @@
 #include "functions.h"
 
 #include <iostream>
-#include <sstream>
 #include <string>
 #include "JacobCommon.h"
 #include "Bin.h"
@@ -28,22 +27,21 @@ void initializeBins(Bin* currentBinPTR, size_t count) {
 * If there were any bins that were empty prints these
 * == INPUTS ==
 * const Bin* currentBinPTR -- Current bin element being looked at
-* stringstream& menuString -- The string being written to
 * size_t count -- the current count
 */
-void buildEmpty(const Bin* currentBinPTR, std::stringstream& menuString, size_t count) {
+void buildEmpty(const Bin* currentBinPTR, size_t count) {
 
-	if (count == NUM_OF_BINS) { menuString << QUIT_OPTION << ". QUIT" << std::endl; }
+	if (count == NUM_OF_BINS) { std::cout << QUIT_OPTION << ". QUIT" << std::endl; }
 
 	else {
 
 		count++;
-		menuString
+		std::cout
 			<< "Bin: #" << count << std::endl
 			<< "Desc: " << currentBinPTR->itemDesc << std::endl
 			<< std::endl;
 
-		return buildEmpty((currentBinPTR + 1), menuString, count);
+		return buildEmpty((currentBinPTR + 1), count);
 
 	}
 
@@ -53,24 +51,23 @@ void buildEmpty(const Bin* currentBinPTR, std::stringstream& menuString, size_t 
 * Builds the menu with all the bins names / inventory
 * == INPUTS ==
 * const Bin* currentBinPTR -- Current bin element being looked at
-* stringstream& menuString -- The string being written to
 * size_t count -- the current count
 */
-void buildUsed(const Bin* currentBinPTR, std::stringstream& menuString, size_t count) {
+void buildUsed(const Bin* currentBinPTR, size_t count) {
 
-	if (currentBinPTR->numberOfItem == -1 || count == NUM_OF_BINS) { return buildEmpty(currentBinPTR, menuString, count); }
+	if (currentBinPTR->numberOfItem == -1 || count == NUM_OF_BINS) { return buildEmpty(currentBinPTR, count); }
 
 	else {
 
 		count++;
 
-		menuString
+		std::cout
 			<< "Bin: #" << count << std::endl
 			<< "Desc: " << currentBinPTR->itemDesc << std::endl
 			<< "Count: " << currentBinPTR->numberOfItem << std::endl
 			<< std::endl;
 
-		return buildUsed((currentBinPTR + 1), menuString, count);
+		return buildUsed((currentBinPTR + 1), count);
 
 	}
 
@@ -79,19 +76,18 @@ void buildUsed(const Bin* currentBinPTR, std::stringstream& menuString, size_t c
 /* Build Options
 * Builds the options portion of string
 * == INPUTS ==
-* stringstream& optionString -- The string being written to
 * size_t count -- the current count
 */
-void buildOptions(std::stringstream& optionString, size_t count) {
+void buildOptions(size_t count) {
 
-	if (count == NUM_OF_EDIT_OPTIONS) { optionString << std::endl << BACK_OPTION << ". " << "BACK" << std::endl; }
+	if (count == NUM_OF_EDIT_OPTIONS) { std::cout << std::endl << BACK_OPTION << ". " << "BACK" << std::endl; }
 
 	else {
 
-		optionString << count + 1 << ". " << *(EDIT_OPTIONS + count) << std::endl;
+		std::cout << count + 1 << ". " << *(EDIT_OPTIONS + count) << std::endl;
 		count++;
 
-		return buildOptions(optionString, count);
+		return buildOptions(count);
 
 	}
 
@@ -101,15 +97,12 @@ void buildOptions(std::stringstream& optionString, size_t count) {
 * calls all initilailzing functions
 * == INPUTS ==
 * Bin* currentBinPTR -- Current bin element being looked at
-* stringstream& menuString -- The main menu string poriton being written to
-* stringstream& optionString -- The option string portion being written to
 * size_t count -- the current count
 */
-void initilizeProgram(Bin* currentBinPTR, std::stringstream& menuString, std::stringstream& optionString) {
+void initilizeProgram(Bin* currentBinPTR) {
 
 	initializeBins(currentBinPTR, 0);
-	buildUsed(currentBinPTR, menuString, 0);
-	buildOptions(optionString, 0);
+	buildUsed(currentBinPTR, 0);
 
 }
 
@@ -130,27 +123,14 @@ void modifyValue(Bin* currentBinPTR, const int value) {
 * == INPUTS ==
 * const Bin* currentBinPTR -- Current bin element being looked at
 * const string option -- optional text to add to printoff
-* stringstream& header -- The header to be written to
 */
-void buildHeader(const Bin* currentBinPTR, const std::string option, std::stringstream& header) {
+void buildHeader(const Bin* currentBinPTR, const std::string option) {
 
-	header
+	std::cout
 		<< "Current amount of " << currentBinPTR->itemDesc << ": " << currentBinPTR->numberOfItem << std::endl
 		<< option << ": " << MAX_BIN_ITEMS << std::endl
 		<< std::endl
 		<< "Enter 0 to go back" << std::endl;
-
-}
-
-/* Build Query
-* Builds a header portion of an outpuit
-* == INPUTS ==
-* const string stringA-C -- Optional First portio of line query
-* stringstream& query -- The query to be written to
-*/
-void buildQuery(const std::string stringA, const std::string stringB, const std::string stringC, std::stringstream& query) {
-
-	query << stringA << stringB << stringC;
 
 }
 
@@ -159,26 +139,10 @@ void buildQuery(const std::string stringA, const std::string stringB, const std:
 * == INPUTS ==
 * const int max -- the Highest range that can be entered
 * const int min -- the lowest value that can be entered
-* stringstream& error -- The error portion of the print being written to
 */
-void buildError(const int max, const int min, std::stringstream& error) {
+void buildError(const int max, const int min) {
 
-	error << " is invalid! Range: (" << max << "-" << min << ")";
-
-}
-
-/* Clear Operands Temps
-* Clears all built string streams and resets them to empty
-* == INPUTS ==
-* stringstream& header -- The header to be written to
-* stringstream& query -- The query to be written to
-* stringstream& error -- The error portion of the print being written to
-*/
-void clearOperandsTemps(std::stringstream& header, std::stringstream& query, std::stringstream& error) {
-
-	header.str("");
-	query.str("");
-	error.str("");
+	std::cout << " is invalid! Range: (" << max << "-" << min << ")";
 
 }
 
@@ -186,55 +150,41 @@ void clearOperandsTemps(std::stringstream& header, std::stringstream& query, std
 * Lets user select which operand to complete and does so
 * == INPUTS ==
 * Bin* currentBinPTR -- The current bin being looked at
-* const stringstream& optionString -- The options printed off
-* stringstream& menuString -- The menu meant to be re-written to
 */
-void performOperand(Bin* currentBinPTR, const std::stringstream& optionString, std::stringstream& menuString) {
-
-	std::stringstream tempQuery;
-	std::stringstream tempHeader;
-	std::stringstream tempError;
+void performOperand(Bin* currentBinPTR) {
 	size_t userInput = 0;
 	Bin* temp = (currentBinPTR - 1);
 	int valueInput = 0;
 	bool isValid = false;
 
 	do {
-
-		ensureValidInput(&userInput, (size_t)(NUM_OF_EDIT_OPTIONS + 1), (size_t)(1), optionString.str(), "Please make a selection: ", " is an invalid selection!");
+		
+		buildOptions(0);
+		ensureValidInput(&userInput, (size_t)(NUM_OF_EDIT_OPTIONS + 1), (size_t)(1), "", "Please make a selection: ", " is an invalid selection!");
 
 		switch (userInput)
 		{
 
 		case 1:
 
-			buildHeader(temp, "Maximum ", tempHeader);
-			buildQuery("Please select a value to ", EDIT_OPTIONS[userInput - 1], ": ", tempQuery);
-			buildError((MAX_BIN_ITEMS - temp->numberOfItem), MIN_BIN_ITEMS, tempError);
+			buildHeader(temp, "Maximum ");
 
-			ensureValidInput(&valueInput, (MAX_BIN_ITEMS - temp->numberOfItem), 0, tempHeader.str(), tempQuery.str(), tempError.str());
+			ensureValidInput(&valueInput, (MAX_BIN_ITEMS - temp->numberOfItem), 0, "", "Please Select a value to add: ", " is out of range! The bin cant be over 30! Enter 0 to go back or a new value to add!");
 			modifyValue(temp, valueInput);
-
-			clearOperandsTemps(tempHeader, tempQuery, tempError);
 
 			break;
 		case 2:
 
-			buildHeader(temp, "Minimum ", tempHeader);
-			buildQuery("Please enter a value to ", EDIT_OPTIONS[userInput - 1], ": ", tempQuery);
-			buildError(temp->numberOfItem, MIN_BIN_ITEMS, tempError);
+			buildHeader(temp, "Minimum ");
 
-			ensureValidInput(&valueInput, temp->numberOfItem, MIN_BIN_ITEMS, tempHeader.str(), tempQuery.str(), tempError.str());
+			ensureValidInput(&valueInput, temp->numberOfItem, MIN_BIN_ITEMS, "", "Please enter a value to subtract: ", " is out of range! The bin cant be negative! Enter 0 to go back or a new value to substract!");
 			modifyValue(temp, -valueInput);
 
-			clearOperandsTemps(tempHeader, tempQuery, tempError);
 
 			break;
 		case 3:
 
 			isValid = true;
-
-			clearOperandsTemps(tempHeader, tempQuery, tempError);
 
 			break;
 		default:
@@ -257,18 +207,15 @@ void binInventoryTracker() {
 	bool isValid = false;
 	size_t userInput = 0;
 	Bin binInventroy[NUM_OF_BINS];
-	std::stringstream binString;
-	std::stringstream optionString;
-	initilizeProgram(binInventroy, binString, optionString);
+	initilizeProgram(binInventroy);
 
 	do {
 
-		ensureValidInput(&userInput, (size_t)(NUM_OF_BINS + 1), (size_t)(1), binString.str(), "Enter a bin to edit: ", " is an invalid input!");
+		ensureValidInput(&userInput, (size_t)(NUM_OF_BINS + 1), (size_t)(1), "", "Enter a bin to edit: ", " is an invalid input! (1-10) or 11 to quit!");
 
 		if (userInput <= 10) {
-			performOperand(binInventroy + userInput, optionString, binString);
-			binString.str("");
-			buildUsed(binInventroy, binString, 0);
+			performOperand(binInventroy + userInput);
+			buildUsed(binInventroy, 0);
 		}
 
 		else {

@@ -1,4 +1,6 @@
 #include "functions.h"
+#include "Procedure.h"
+#include <string>
 
 int main() {
 

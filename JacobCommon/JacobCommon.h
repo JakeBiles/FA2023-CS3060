@@ -1,199 +1,60 @@
-#ifndef JCommon
-#define JCommon
-
-template <typename T>
-size_t findArraySize(T* someArray) {
-
-	return (sizeof(*someArray) / sizeof(*someArray[0]));
-
-}
-
-#endif // !JCommon
-
-#ifndef JCInput
-#define JCINPUT
+#pragma once
 #include <iostream>
-#include <iomanip>
-#include <string>
+#include <limits>
 
 /* Get User Input
-* Handles a generic input and performs cleanup for cin
+* Gets a user Input, ensures fits the input type -- cleans buffer -- Repeats untill valid type
 * == INPUTS ==
 * Type T (generic) userSelection -- variable taking input
+* const char* header -- The header portion of the prompt (Above Input Line)
+* const char* queryLine -- The question being asked (on input line)
 */
-template <typename T> void getUserInput(T* userEntry, const std::string queryLine, const size_t valueLimiter) {
-
-	bool isValid = false;
+template <typename T> T getUserInput(T& userEntry, const char* header, const char* queryLine) {
 
 	do {
 
-		std::cout << std::endl << queryLine;
+		std::cout << header << "\n";
+		std::cout << "\n" << queryLine;
 
-		if (!(std::cin >> *userEntry)) {
+		if (!(std::cin >> userEntry)) {
+
 			system("cls");
 			std::cin.clear();
 			std::cin.ignore(BUFSIZ, '\n');
-			std::cout << "Error with entry!" << std::endl;
+			std::cout << "Error with previous entry\n";
+
 		}
 
 		else {
-			T temp = *userEntry;
+
 			system("cls");
 			std::cin.clear();
 			std::cin.ignore(BUFSIZ, '\n');
-			isValid = true;
+			return userEntry;
+
 		}
 
-	} while (!isValid);
+	} while (true);
 
 }
 
-/* Get User Input
-* Handles a generic input and ensures its within a valid region
+/* Get Valid User Input
+* Uses the Get Uers Input Method to get a requested input within a range -- repeats untill valid
 * == INPUTS ==
-* Type T (generic) userInput -- variable taking input
-* const T inclusiveMax -- The max range of the input
-* const T inclusiveMin -- The min range of the input
-* cont string header -- The prompt being asked
-* const string query -- The line - entry
-* const string error -- The error if invalid input
+* Type T (generic) userSelection -- variable taking input
+* const char* header -- The header portion of the prompt (Above Input Line)
+* const char* queryLine -- The question being asked (on input line)
+* T iMax -- The inclusive max range
+* T iMin -- The inclusive min range
+* == OUTPUTS ==
+* T -- The userEntry varaible
 */
-template <typename T> void ensureValidInput(T* userInput, const T inclusiveMax, const T inclusiveMin, const std::string header, const std::string query, const std::string error) {
-
-	bool isValid = false;
+template <typename T> T getValidUserInput(T& userEntry, const char* header, const char* queryLine, T iMax, T iMin) {
 
 	do {
 
-		std::cout << header;
-		getUserInput(userInput, query);
+		getUserInput(userEntry, header, queryLine);
+		if (userEntry > iMax || userEntry < iMin) std::cout << "Out of range [" << iMax << "-" << iMin << "]\n";
+		else return userEntry;
 
-		if (*userInput > inclusiveMax || *userInput < inclusiveMin)  std::cout << *userInput << error << std::endl;
-		else isValid = true;
-
-	} while (!isValid);
-
-}
-
-#endif // JCInput
-
-#ifndef JCOutput
-#define JCOutput
-#include <iostream>
-
-template <typename T>
-void printArray(T* someArray) {
-
-	size_t arraySize = findArraySize(someArray);
-	for (size_t i = 0; i < arraySize; i++) { std::cout << *(*someArray + i) << std::endl; }
-
-}
-
-#endif // JCOutput
-
-#ifndef JCSorting
-#define JCSorting
-
-template <typename T>
-void linearSort(T* someArray) {
-
-	size_t arraySize = findArraySize(someArray);
-
-	for (size_t i = 0; i < arraySize; i++) {
-
-		for (size_t j = i + 1; j < arraySize; j++) {
-
-			double temp = (double)(*(*someArray + i)); // Start: Ex [1],2,3 
-			double right = (double)(*(*someArray + j)); // Right (start + 1) Ex 1,[2],3 
-
-			if (temp < right) { // if [1] < [2]
-
-				*(*someArray + j) = temp; // right (start+1) = [1]
-				*(*someArray + i) = right; // left (start) = [2]
-
-			}
-
-		}
-
-	}
-
-}
-
-#endif // JCSorting
-
-#ifndef JCSearching
-#define JCSearching
-
-template <typename T>
-long int linearSearch(const T* someArray, double target) {
-
-	size_t arraySize = findArraySize(someArray);
-	size_t element = 0;
-	size_t comparrisons = 0;
-
-	for (size_t i = 0; i < arraySize; i++) {
-
-		int temp = *(*someArray + i);
-		comparrisons++;
-		if (target == *(*someArray + i)) {
-
-			std::cout
-				<< "Target: " << target << " found at element: " << i << std::endl
-				<< "Comparrisons: " << comparrisons << std::endl;
-
-			return i;
-
-		}
-
-	}
-
-	std::cout
-		<< "Target: " << target << " was unable to be found." << std::endl
-		<< "Comparrisons: " << comparrisons << std::endl;
-
-	return -1;
-
-}
-
-template <typename T>
-long int binarySearch(const T* someArray, size_t arraySize, size_t middle, size_t comparrisons, double target) {
-
-
-	if (middle >= arraySize || middle == -1) {
-
-		std::cout
-			<< "Target: " << target << " was unable to be found." << std::endl
-			<< "Comparrisons: " << comparrisons << std::endl;
-
-		return -1;
-
-	}
-
-	else if (target > *(*someArray + middle)) {
-
-		comparrisons++;
-		middle = middle - floor((middle) / (2 * comparrisons));
-		return binarySearch(someArray, arraySize, middle, comparrisons, target);
-
-	}
-
-	else if (target < *(*someArray + middle)) {
-
-		comparrisons++;
-		middle = middle + floor((middle) / (2 * comparrisons));
-		return binarySearch(someArray, arraySize, middle, comparrisons, target);
-
-	}
-
-	else {
-
-		std::cout
-			<< "Target: " << target << " found at element: " << middle << std::endl
-			<< "Comparrisons: " << comparrisons << std::endl;
-
-		return target;
-
-	}
-
-}
-
-#endif // JCSearching
+	} while (true);

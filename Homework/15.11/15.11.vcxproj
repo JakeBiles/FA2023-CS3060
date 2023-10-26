@@ -128,18 +128,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="CourseGrades.h" />
     <ClInclude Include="Essay.h" />
+    <ClInclude Include="FinalExam.h" />
     <ClInclude Include="GradedActivity.h" />
+    <ClInclude Include="JacobCommon.h" />
     <ClInclude Include="Lab.h" />
     <ClInclude Include="Exam.h" />
     <ClInclude Include="PassFailExam.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Essay.cpp" />
+    <ClCompile Include="CourseGrades.cpp" />
     <ClCompile Include="Exam.cpp" />
     <ClCompile Include="GraddedActivity.cpp" />
-    <ClCompile Include="Lab.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="PassFailExam.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

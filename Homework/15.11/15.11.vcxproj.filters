@@ -13,51 +13,81 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Class">
+    <Filter Include="Header Files\Class Hierachies">
+      <UniqueIdentifier>{82b61e17-58ff-4dae-9c8d-3fd209409073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Class Hierachies\Gradded Activity">
       <UniqueIdentifier>{71b64205-9569-4a38-8272-806ff63f631a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Class">
+    <Filter Include="Header Files\Class Hierachies\Gradded Activity\Super">
+      <UniqueIdentifier>{e0117d06-974f-46c5-9351-7ec9d492b45b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Class Hierachies\Gradded Activity\Derrived">
+      <UniqueIdentifier>{8e1dd028-2af0-499d-9ecc-7f72d5320a9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Class Hierachies\Gradded Activity\Derrived\Exam">
+      <UniqueIdentifier>{8d9a519a-cea2-4684-813b-6cc5a94a32a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Class Hierachies">
       <UniqueIdentifier>{faddaf2b-c2e6-495e-830c-fcfcadd30b31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Class Hierachies\GradedActivity">
+      <UniqueIdentifier>{eaa2eff5-b51e-4e6b-a3fd-6eb3d6335f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Class Hierachies\GradedActivity\Super">
+      <UniqueIdentifier>{cbf60f17-abad-4ce3-8fd5-5b36220829d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Class Hierachies\GradedActivity\Derived">
+      <UniqueIdentifier>{9de54a48-8b0c-4231-8983-2c9b11a4054e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Class Hierachies\GradedActivity\Derived\Exam">
+      <UniqueIdentifier>{d4266f00-df03-440e-bbe1-86386883d27a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GradedActivity.h">
-      <Filter>Header Files\Class</Filter>
+      <Filter>Header Files\Class Hierachies\Gradded Activity\Super</Filter>
     </ClInclude>
     <ClInclude Include="Essay.h">
-      <Filter>Header Files\Class</Filter>
+      <Filter>Header Files\Class Hierachies\Gradded Activity\Derrived</Filter>
     </ClInclude>
     <ClInclude Include="Lab.h">
-      <Filter>Header Files\Class</Filter>
+      <Filter>Header Files\Class Hierachies\Gradded Activity\Derrived</Filter>
     </ClInclude>
     <ClInclude Include="Exam.h">
-      <Filter>Header Files\Class</Filter>
+      <Filter>Header Files\Class Hierachies\Gradded Activity\Derrived\Exam</Filter>
     </ClInclude>
     <ClInclude Include="PassFailExam.h">
-      <Filter>Header Files\Class</Filter>
+      <Filter>Header Files\Class Hierachies\Gradded Activity\Derrived\Exam</Filter>
+    </ClInclude>
+    <ClInclude Include="FinalExam.h">
+      <Filter>Header Files\Class Hierachies\Gradded Activity\Derrived\Exam</Filter>
     </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CourseGrades.h">
+      <Filter>Header Files\Class Hierachies</Filter>
+    </ClInclude>
+    <ClInclude Include="JacobCommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GraddedActivity.cpp">
-      <Filter>Source Files\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="Lab.cpp">
-      <Filter>Source Files\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="Essay.cpp">
-      <Filter>Source Files\Class</Filter>
+      <Filter>Source Files\Class Hierachies\GradedActivity\Super</Filter>
     </ClCompile>
     <ClCompile Include="Exam.cpp">
-      <Filter>Source Files\Class</Filter>
+      <Filter>Source Files\Class Hierachies\GradedActivity\Derived\Exam</Filter>
     </ClCompile>
     <ClCompile Include="PassFailExam.cpp">
-      <Filter>Source Files\Class</Filter>
+      <Filter>Source Files\Class Hierachies\GradedActivity\Derived\Exam</Filter>
+    </ClCompile>
+    <ClCompile Include="CourseGrades.cpp">
+      <Filter>Source Files\Class Hierachies</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
